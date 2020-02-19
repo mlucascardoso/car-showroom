@@ -12,7 +12,11 @@
     "test:unit": "npm test -- --watch -c jest-unit-config.js",
     "test:integration": "npm test -- --watch -c jest-integration-config.js",
     "test:staged": "npm test -- --findRelatedTests --silent",
-    "test:ci": "npm test -- --coverage --silent"
+    "test:ci": "npm test -- --coverage --silent",
+    "migrate": "npx sequelize-cli db:migrate",
+    "migrate:undo": "npx sequelize-cli db:migrate:undo:all",
+    "seed": "npx sequelize-cli db:seed:all",
+    "seed:undo": "npx sequelize-cli db:seed:undo:all"
   },
   "keywords": [
     "showroom",
@@ -26,7 +30,9 @@
     "moment": "2.24.0",
     "passport": "0.4.1",
     "ramda": "0.27.0",
-    "require-dir": "1.2.0"
+    "require-dir": "1.2.0",
+    "sequelize": "5.21.3",
+    "sequelize-cli": "5.5.1"
   },
   "devDependencies": {
     "@commitlint/cli": "8.3.5",
