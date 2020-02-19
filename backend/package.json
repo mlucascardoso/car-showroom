@@ -1,0 +1,43 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "The car showroom API",
+  "main": "commitlint.config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "jest --colors --noStackTrace --passWithNoTests --runInBand --verbose",
+    "test:unit": "npm test -- --watch -c jest-unit-config.js",
+    "test:integration": "npm test -- --watch -c jest-integration-config.js",
+    "test:staged": "npm test -- --findRelatedTests --silent",
+    "test:ci": "npm test -- --coverage --silent"
+  },
+  "keywords": [
+    "showroom",
+    "car"
+  ],
+  "author": "Lucas M Cardoso",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "1.19.0",
+    "express": "4.17.1",
+    "moment": "2.24.0",
+    "passport": "0.4.1",
+    "ramda": "0.27.0",
+    "require-dir": "1.2.0"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "8.3.5",
+    "@commitlint/config-conventional": "8.3.4",
+    "cors": "2.8.5",
+    "dotenv-json-complex": "1.0.1",
+    "eslint": "6.8.0",
+    "eslint-config-google": "0.14.0",
+    "eslint-plugin-import-helpers": "1.0.2",
+    "husky": "4.0.0-beta.5",
+    "jest": "25.1.0",
+    "lint-staged": "10.0.7"
+  }
+}

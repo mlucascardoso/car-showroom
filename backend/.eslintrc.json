@@ -1,0 +1,49 @@
+{
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "es6": true
+    },
+    "extends": [
+        "google"
+    ],
+    "globals": {
+        "Atomics": "readonly",
+        "SharedArrayBuffer": "readonly"
+    },
+    "parserOptions": {
+        "ecmaVersion": 2018
+    },
+    "plugins": ["eslint-plugin-import-helpers"],
+    "rules": {
+        "arrow-parens": "off",
+        "camelcase": "off",
+        "comma-dangle": "off",
+        "indent": [
+            "error",
+            4
+        ],
+        "linebreak-style": "off",
+        "max-len": "off",
+        "new-cap": "off",
+        "no-tabs": [
+            "error",
+            {
+                "allowIndentationTabs": true
+            }
+        ],
+        "object-curly-spacing": "off",
+        "import-helpers/order-imports": [
+            "warn",
+            {
+                "newlinesBetween": "always", // new line between groups
+                "groups": [
+                    "module",
+                    ["parent", "sibling", "index"]
+                ],
+                "alphabetize": { "order": "asc", "ignoreCase": true }
+            }
+        ],
+        "space-before-function-paren": "off"
+    }
+}
