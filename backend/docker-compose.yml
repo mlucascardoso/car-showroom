@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  # PostgreSQL
+  postgres:
+    image: postgres:latest
+    container_name: car-showroom-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: car_showroom
+    ports:
+      - "5432:5432"
+    volumes: 
+      - ".database/data:/var/lib/postgresql/data"
+    networks:
+      - development-network
+
+  # node:
+  #   container_name: book-search-api
+  #   build:
+  #     dockerfile: ./docker/api.dockerfile
+  #     context: .
+  #   ports: 
+  #     - "3000:3000"
+  #   networks:
+  #     - development-network
+  #   depends_on:
+  #     - "postgres"
+
+networks:
+  development-network:
+    driver: bridge

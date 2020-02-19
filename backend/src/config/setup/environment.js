@@ -6,13 +6,10 @@ module.exports = () => {
     }
 
     const custom = JSON.parse(process.env.custom);
-    const vcapServices = JSON.parse(process.env.VCAP_SERVICES);
 
     return {
         custom,
-        hana: vcapServices['user-provided'][0],
         nodeEnv,
         port: custom.port,
-        xsuaa: vcapServices['xsuaa'][0]
     };
 };

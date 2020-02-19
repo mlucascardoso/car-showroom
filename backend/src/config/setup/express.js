@@ -1,8 +1,8 @@
 const bodyParser = require('body-parser');
 
 const routes = require('../../router');
-const { nodeEnv, custom } = require('./environment')();
 const { passport, strategy } = require('../middlewares/passport')();
+const { nodeEnv, custom } = require('./environment')();
 
 module.exports = (app) => {
     if (nodeEnv === 'localhost') {
