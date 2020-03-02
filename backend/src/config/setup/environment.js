@@ -11,5 +11,6 @@ module.exports = () => {
         custom,
         nodeEnv,
         port: custom.port,
+        database: custom.database
     };
 };

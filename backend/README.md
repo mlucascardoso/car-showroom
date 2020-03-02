@@ -13,10 +13,18 @@ Create a file `.env.json` on api dir and paste the following JSON into it:
 {
     "node_env": "localhost",
     "custom": {
+        "port": 8080,
         "api": {
             "prefix": "/api"
         },
-        "port": 8080
+        "database": {
+            "username": "",
+            "password": "",
+            "name": "",
+            "host": "",
+            "dialect": "postgres",
+            "logging": "true"
+        }
     }
 }
 ```
