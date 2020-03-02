@@ -1,10 +1,11 @@
 const { Router } = require('express');
+const { readdirSync } = require('fs');
 const { join } = require('path');
-const requireDir = require('require-dir');
 
 const routes = () => {
-    const routesFn = requireDir(join(__dirname, './routes'));
-    const routes = Object.keys(routesFn).map((key) => routesFn[key]);
+    const dir = join(__dirname, './routes');
+    const routesFn = readdirSync(dir);
+    const routes = Object.keys(routesFn).map((key) => require(join(dir, routesFn[key])));
 
     return routes;
 };

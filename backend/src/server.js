@@ -1,11 +1,7 @@
-const express = require('express');
-
 const { port } = require('./config/setup/environment')();
 
 const startServer = () => {
-    const app = express();
-
-    require('./config/setup')(app);
+    const app = require('./app')();
 
     app.listen(port, err => {
         if (err) {

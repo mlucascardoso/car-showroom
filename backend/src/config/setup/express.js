@@ -13,11 +13,6 @@ module.exports = (app) => {
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: true }));
 
-    app.use((req, res, next) => {
-        console.log('req.headers.authorization--------->', req.headers.authorization);
-        next();
-    });
-
     // security
     app.use(passport.initialize());
     app.use(passport.authenticate(strategy, { session: false }));
