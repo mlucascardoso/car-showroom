@@ -1,5 +1,5 @@
 // const { MissingParamError, InvalidParamError } = require('../helper/error');
-const HttpResponse = require('../helper/http/http-response');
+const HttpResponse = require('../helper/http/response');
 
 module.exports = class ArticleService {
     /**

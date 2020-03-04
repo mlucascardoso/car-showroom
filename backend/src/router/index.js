@@ -3,9 +3,13 @@ const { readdirSync } = require('fs');
 const { join } = require('path');
 
 const routes = () => {
-    const dir = join(__dirname, './routes');
-    const routesFn = readdirSync(dir);
-    const routes = Object.keys(routesFn).map((key) => require(join(dir, routesFn[key])));
+    const dir = join(__dirname, '../router');
+    const scannedDir = readdirSync(dir).filter(dir => dir !== 'index.js');
+
+    let routes = [];
+    if (scannedDir) {
+        routes = Object.keys(scannedDir).map((key) => require(join(dir, scannedDir[key], 'routes.js')));
+    }
 
     return routes;
 };

@@ -8,6 +8,7 @@
   },
   "scripts": {
     "start": "node src/server.js",
+    "dev": "nodemon src/server.js --ignore './__tests__/'",
     "test": "jest --colors --noStackTrace --passWithNoTests --runInBand --verbose",
     "test:unit": "npm test -- --watch -c jest-unit-config.js",
     "test:integration": "npm test -- --watch -c jest-integration-config.js",
@@ -27,6 +28,7 @@
   "dependencies": {
     "body-parser": "1.19.0",
     "express": "4.17.1",
+    "express-validator": "6.4.0",
     "moment": "2.24.0",
     "passport": "0.4.1",
     "pg": "7.18.2",
@@ -44,6 +46,7 @@
     "husky": "4.0.0-beta.5",
     "jest": "25.1.0",
     "lint-staged": "10.0.7",
+    "nodemon": "^2.0.2",
     "sequelize-cli": "5.5.1"
   }
 }

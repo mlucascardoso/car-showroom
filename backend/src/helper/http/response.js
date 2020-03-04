@@ -13,14 +13,18 @@ module.exports = class HttpResponse {
     }
 
     /**
-   * @param {object} error
+   * @param {Array} validationErrors
    * @return {object}
    */
-    static badRequest(error) {
+    static badRequest(validationErrors) {
         return {
             statusCode: 400,
             body: {
-                error: error.message
+                errors: validationErrors.map(err => {
+                    return {
+                        field: err.param, message: err.msg
+                    };
+                })
             }
         };
     }

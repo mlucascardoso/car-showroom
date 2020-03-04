@@ -1,4 +1,4 @@
-const date = require('./date');
+const date = require('./date-validator');
 
 module.exports = {
     date

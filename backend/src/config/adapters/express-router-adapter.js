@@ -71,10 +71,10 @@ module.exports = class ExpressRouterAdapter {
      * @param {object} service
      * @return {void}
      */
-    static delete(service) {
+    static destroy(service) {
         return async (req, res) => {
             const httpRequest = {
-                params: req.params
+                body: req.params
             };
 
             const httpResponse = await service.delete(httpRequest);
