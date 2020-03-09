@@ -107,3 +107,4 @@ dist
 package-lock.json
 .env.json
 .database/
+__tests__/database.sqlite
