@@ -1,15 +1,13 @@
 module.exports = () => {
-    const nodeEnv = process.env.node_env;
+    const environment = typeof process.env.node_env === undefined ? '' : process.env.node_env;
 
-    if (typeof nodeEnv === 'undefined' || nodeEnv === 'localhost') {
-        require('dotenv-json-complex')();
-    }
+    require('dotenv-json-complex')({ environment });
 
     const custom = JSON.parse(process.env.custom);
 
     return {
         custom,
-        nodeEnv,
+        nodeEnv: environment,
         port: custom.port,
         database: custom.database
     };

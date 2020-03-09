@@ -10,12 +10,12 @@ module.exports = {
             description: {
                 type: Sequelize.STRING(30)
             },
-            createdAt: {
+            created_at: {
                 allowNull: false,
                 type: Sequelize.DATE,
                 field: 'created_at'
             },
-            updatedAt: {
+            updated_at: {
                 allowNull: true,
                 type: Sequelize.DATE,
                 field: 'updated_at'

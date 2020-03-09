@@ -2,45 +2,37 @@ module.exports = {
     up: (queryInterface, Sequelize) => {
         return queryInterface.createTable('vehicles', {
             id: {
-                allowNull: false,
-                autoIncrement: true,
+                type: Sequelize.INTEGER,
                 primaryKey: true,
+                autoIncrement: true,
+                allowNull: false
+            },
+            vehicle_type_id: {
                 type: Sequelize.INTEGER
             },
-            vehicleTypeId: {
-                type: Sequelize.INTEGER,
-                field: 'vehicle_type_id'
+            brand_id: {
+                type: Sequelize.INTEGER
             },
-            brandId: {
-                type: Sequelize.INTEGER,
-                field: 'brand_id'
+            vehicle_condition_id: {
+                type: Sequelize.INTEGER
             },
-            vehicleConditionId: {
-                type: Sequelize.INTEGER,
-                field: 'vehicle_condition_id'
+            vehicle_transmission_id: {
+                type: Sequelize.INTEGER
             },
-            vehicleTransmissionId: {
-                type: Sequelize.INTEGER,
-                field: 'vehicle_transmission_id'
+            vehicle_fuel_id: {
+                type: Sequelize.INTEGER
             },
-            vehicleFuelId: {
-                type: Sequelize.INTEGER,
-                field: 'vehicle_fuel_id'
-            },
-            vehicleModelId: {
-                type: Sequelize.INTEGER,
-                field: 'vehicle_model_id'
+            vehicle_model_id: {
+                type: Sequelize.INTEGER
             },
             name: {
                 type: Sequelize.STRING(30)
             },
-            fabricationYear: {
-                type: Sequelize.INTEGER,
-                field: 'fabrication_year'
+            fabrication_year: {
+                type: Sequelize.INTEGER
             },
-            modelYear: {
-                type: Sequelize.INTEGER,
-                field: 'model_year'
+            model_year: {
+                type: Sequelize.INTEGER
             },
             price: {
                 type: Sequelize.DECIMAL(10, 2)
@@ -48,15 +40,13 @@ module.exports = {
             mileage: {
                 type: Sequelize.INTEGER
             },
-            createdAt: {
-                allowNull: false,
+            created_at: {
                 type: Sequelize.DATE,
-                field: 'created_at'
+                allowNull: false
             },
-            updatedAt: {
-                allowNull: true,
+            updated_at: {
                 type: Sequelize.DATE,
-                field: 'updated_at'
+                allowNull: true,
             }
         }, {
             indexes: [

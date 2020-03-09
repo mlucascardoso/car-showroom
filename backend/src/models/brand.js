@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
         name: DataTypes.STRING(30)
     }, {});
 
-    brands.associate = models => {};
+    brands.associate = models => { };
 
     return brands;
 };

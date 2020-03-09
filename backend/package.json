@@ -9,12 +9,14 @@
   "scripts": {
     "start": "node src/server.js",
     "dev": "nodemon src/server.js --ignore './__tests__/'",
-    "test": "jest --colors --noStackTrace --passWithNoTests --runInBand --verbose",
-    "test:unit": "npm test -- --watch -c jest-unit-config.js",
+    "pretest": "node_env=test npm run migrate",
+    "test": "node_env=test jest --colors --noStackTrace --passWithNoTests --runInBand --verbose",
+    "test:unit": "node_env=test npm test -- --watch -c jest-unit-config.js",
     "test:integration": "npm test -- --watch -c jest-integration-config.js",
     "test:staged": "npm test -- --findRelatedTests --silent",
     "test:ci": "npm test -- --coverage --silent",
-    "migrate": "npx sequelize-cli db:migrate",
+    "posttest": "node_env=test npm run migrate:undo",
+    "migrate": "node_env=test npx sequelize-cli db:migrate",
     "migrate:undo": "npx sequelize-cli db:migrate:undo:all",
     "seed": "npx sequelize-cli db:seed:all",
     "seed:undo": "npx sequelize-cli db:seed:undo:all"
@@ -33,7 +35,7 @@
     "passport": "0.4.1",
     "pg": "7.18.2",
     "ramda": "0.27.0",
-    "sequelize": "5.21.3"
+    "sequelize": "5.21.5"
   },
   "devDependencies": {
     "@commitlint/cli": "8.3.5",
@@ -46,7 +48,8 @@
     "husky": "4.0.0-beta.5",
     "jest": "25.1.0",
     "lint-staged": "10.0.7",
-    "nodemon": "^2.0.2",
-    "sequelize-cli": "5.5.1"
+    "nodemon": "2.0.2",
+    "sequelize-cli": "5.5.1",
+    "sqlite3": "4.1.1"
   }
 }
