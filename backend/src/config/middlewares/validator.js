@@ -1,6 +1,6 @@
 const { validationResult } = require('express-validator');
 
-const HttpResponse = require('../../helper/http/response');
+const HttpResponse = require('../../helpers/http/response');
 
 module.exports = (req, res, next) => {
     const errors = validationResult(req);

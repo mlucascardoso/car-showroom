@@ -1,6 +1,6 @@
 const passport = require('passport');
 
-const AnonymousStrategy = require('../../helper/http/passport-noauth');
+const AnonymousStrategy = require('../../helpers/http/passport-noauth');
 // const { nodeEnv } = require('../setup/environment')();
 
 module.exports = () => {

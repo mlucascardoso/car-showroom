@@ -1,6 +1,6 @@
 const bodyParser = require('body-parser');
 
-const routes = require('../../router');
+const routes = require('../../routers');
 const { passport, strategy } = require('../middlewares/passport')();
 const { nodeEnv, custom } = require('./environment')();
 

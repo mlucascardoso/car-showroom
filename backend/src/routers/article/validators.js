@@ -1,7 +1,7 @@
 const { check, param, query } = require('express-validator');
 
-const { InvalidParamError, MissingParamError } = require('../../helper/error');
-const { dateValidator } = require('../../helper/validator');
+const { InvalidParamError, MissingParamError } = require('../../helpers/errors');
+const { dateValidator } = require('../../helpers/validators');
 
 const findAllValidator = () => {
     return [

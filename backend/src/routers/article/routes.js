@@ -2,7 +2,7 @@ const router = require('express').Router();
 
 const { create, destroy, findById, findAll } = require('../../config/adapters/express-router-adapter');
 const validate = require('../../config/middlewares/validator');
-const ArticleService = require('../../service/article-service');
+const ArticleService = require('../../services/article-service');
 const { createValidator, destroyValidator, findAllValidator, findByIdValidator } = require('./validators');
 
 module.exports = (app) => {

@@ -3,7 +3,7 @@ const { readdirSync } = require('fs');
 const { join } = require('path');
 
 const routes = () => {
-    const dir = join(__dirname, '../router');
+    const dir = join(__dirname, '../routers');
     const scannedDir = readdirSync(dir).filter(dir => dir !== 'index.js');
 
     let routes = [];
