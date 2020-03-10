@@ -1,7 +1,5 @@
 const { database } = require('./environment')();
 
-console.log(process.env.node_env);
-
 module.exports = {
     host: database.host,
     username: database.username,
