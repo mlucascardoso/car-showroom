@@ -48,7 +48,9 @@ describe('Response helper', () => {
             expect(response.statusCode).toBe(400);
             expect(response.body).toEqual(
                 expect.objectContaining({
-                    errors: expect.any(Array)
+                    errors: expect.arrayContaining([
+                        expect.any(Object)
+                    ])
                 })
             );
         });
