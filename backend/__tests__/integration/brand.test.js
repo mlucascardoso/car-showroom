@@ -111,7 +111,7 @@ describe('Brands', () => {
             );
         });
 
-        it('should create brand if already exists', async () => {
+        it('should only return brand if already exists', async () => {
             const { request } = makeSut();
 
             const name = faker.name.title();
