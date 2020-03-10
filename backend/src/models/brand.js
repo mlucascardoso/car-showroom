@@ -1,9 +1,9 @@
 module.exports = (sequelize, DataTypes) => {
-    const brands = sequelize.define('brands', {
+    const Brand = sequelize.define('Brand', {
         name: DataTypes.STRING(30)
     }, {});
 
-    brands.associate = models => { };
+    Brand.associate = models => { };
 
-    return brands;
+    return Brand;
 };

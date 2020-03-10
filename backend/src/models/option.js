@@ -1,13 +1,13 @@
 module.exports = (sequelize, DataTypes) => {
-    const options = sequelize.define('options', {
+    const Option = sequelize.define('Option', {
         description: DataTypes.STRING(100)
     }, {});
 
-    options.associate = models => {
-        options.belongsToMany(models.vehicles, {
-            through: models.vehicleOptions
+    Option.associate = models => {
+        Option.belongsToMany(models.Vehicle, {
+            through: models.VehicleOption
         });
     };
 
-    return options;
+    return Option;
 };

@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    const vehicles = sequelize.define('vehicles', {
+    const Vehicle = sequelize.define('Vehicle', {
         vehicleTypeId: DataTypes.INTEGER,
         brandId: DataTypes.INTEGER,
         vehicleConditionId: DataTypes.INTEGER,
@@ -13,35 +13,35 @@ module.exports = (sequelize, DataTypes) => {
         mileage: DataTypes.INTEGER
     }, {});
 
-    vehicles.associate = models => {
-        vehicles.belongsTo(models.vehicleTypes, {
-            foreignKey: 'vehicleTypeId'
+    Vehicle.associate = models => {
+        Vehicle.belongsTo(models.VehicleType, {
+            foreignKey: 'vehicle_type_id'
         });
 
-        vehicles.belongsTo(models.brands, {
-            foreignKey: 'brandId'
+        Vehicle.belongsTo(models.Brand, {
+            foreignKey: 'brand_id'
         });
 
-        vehicles.belongsTo(models.vehicleConditions, {
-            foreignKey: 'vehicleConditionId'
+        Vehicle.belongsTo(models.VehicleCondition, {
+            foreignKey: 'vehicle_condition_id'
         });
 
-        vehicles.belongsTo(models.vehicleTransmissions, {
-            foreignKey: 'vehicleTransmissionId'
+        Vehicle.belongsTo(models.VehicleTransmission, {
+            foreignKey: 'vehicle_transmission_id'
         });
 
-        vehicles.belongsTo(models.vehicleFuels, {
-            foreignKey: 'vehicleFuelId'
+        Vehicle.belongsTo(models.VehicleFuel, {
+            foreignKey: 'vehicle_fuel_id'
         });
 
-        vehicles.belongsTo(models.vehicleModels, {
-            foreignKey: 'vehicleModelId'
+        Vehicle.belongsTo(models.VehicleModel, {
+            foreignKey: 'vehicle_model_id'
         });
 
-        vehicles.belongsToMany(models.options, {
-            through: models.vehicleOptions
+        Vehicle.belongsToMany(models.Option, {
+            through: models.VehicleOption
         });
     };
 
-    return vehicles;
+    return Vehicle;
 };

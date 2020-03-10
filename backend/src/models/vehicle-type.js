@@ -1,9 +1,9 @@
 module.exports = (sequelize, DataTypes) => {
-    const vehicleTypes = sequelize.define('vehicleTypes', {
+    const VehicleType = sequelize.define('VehicleType', {
         description: DataTypes.STRING(100)
     }, {});
 
-    vehicleTypes.associate = models => {};
+    VehicleType.associate = models => { };
 
-    return vehicleTypes;
+    return VehicleType;
 };
