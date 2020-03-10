@@ -44,7 +44,7 @@ module.exports = class HttpResponse {
         return {
             statusCode: 500,
             body: {
-                error: new ServerError().message
+                errors: new ServerError().message
             }
         };
     }

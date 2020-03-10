@@ -8,7 +8,7 @@ describe('Response helper', () => {
             expect(response.statusCode).toBe(500);
             expect(response.body).toEqual(
                 expect.objectContaining({
-                    error: new ServerError().message
+                    errors: new ServerError().message
                 })
             );
         });
@@ -29,7 +29,7 @@ describe('Response helper', () => {
             expect(response.statusCode).toBe(500);
             expect(response.body).toEqual(
                 expect.objectContaining({
-                    error: new ServerError().message
+                    errors: new ServerError().message
                 })
             );
         });
@@ -62,7 +62,7 @@ describe('Response helper', () => {
             expect(response.statusCode).toBe(500);
             expect(response.body).toEqual(
                 expect.objectContaining({
-                    error: new ServerError().message
+                    errors: new ServerError().message
                 })
             );
         });
