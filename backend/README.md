@@ -22,8 +22,7 @@ Create a file `.env.json` on api dir and paste the following JSON into it:
             "password": "postgres",
             "name": "car_showroom",
             "host": "localhost",
-            "dialect": "postgres",
-            "logging": "true"
+            "dialect": "postgres"
         }
     }
 }
@@ -36,6 +35,29 @@ In order to run the API correctly, do the following steps:
 - To create the database with docker and docker-compose installed run `docker-compose up`
 - After creating the database run `npm run migrate` to create tables
 - After that just run `npm start`
+
+
+## Tests
+
+Tests are available in __tests__ folder, the following steps show how to run tests properly:
+- create a file .env.test.json and paste this content into it:
+```
+{
+    "node_env": "localhost",
+    "custom": {
+        "port": 8080,
+        "api": {
+            "prefix": "/api"
+        },
+        "database": {
+            "dialect": "sqlite"
+        }
+    }
+}
+```
+- run `npm run test:unit` for unit tests
+- run `npm run test:integration` for integration tests
+- run `npm run test:ci` for code coverage
 
 
 ## API Structure
