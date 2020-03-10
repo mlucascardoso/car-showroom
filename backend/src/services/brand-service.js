@@ -16,7 +16,9 @@ module.exports = class BrandService {
      */
     async findAll(httpRequest) {
         try {
-            return HttpResponse.success({});
+            const brands = await this.model.findAndCountAll();
+
+            return HttpResponse.success(brands);
         } catch (err) {
             return HttpResponse.serverError();
         }
@@ -29,9 +31,13 @@ module.exports = class BrandService {
      */
     async create({ bodyParams }) {
         try {
-            const { id } = await this.model.create({ name: bodyParams.name });
+            let brand = await this.model.findOne({
+                where: { name: bodyParams.name }
+            });
 
-            const brand = await this.model.findByPk(id);
+            if (!brand) {
+                brand = await this.model.create({ name: bodyParams.name });
+            }
 
             return HttpResponse.success(brand);
         } catch (err) {
