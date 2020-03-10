@@ -7,7 +7,7 @@ module.exports = class ExpressRouterAdapter {
     static findById(service) {
         return async (req, res) => {
             const httpRequest = {
-                body: req.params
+                routeParams: req.params
             };
             const httpResponse = await service.findById(httpRequest);
 
@@ -23,7 +23,7 @@ module.exports = class ExpressRouterAdapter {
     static findAll(service) {
         return async (req, res) => {
             const httpRequest = {
-                body: req.query
+                getParams: req.query
             };
             const httpResponse = await service.findAll(httpRequest);
 
@@ -39,7 +39,7 @@ module.exports = class ExpressRouterAdapter {
     static create(service) {
         return async (req, res) => {
             const httpRequest = {
-                body: req.body
+                bodyParams: req.body
             };
 
             const httpResponse = await service.create(httpRequest);
@@ -56,8 +56,8 @@ module.exports = class ExpressRouterAdapter {
     static update(service) {
         return async (req, res) => {
             const httpRequest = {
-                params: req.params,
-                body: req.body
+                routeParams: req.params,
+                bodyParams: req.body
             };
 
             const httpResponse = await service.update(httpRequest);
@@ -74,7 +74,7 @@ module.exports = class ExpressRouterAdapter {
     static destroy(service) {
         return async (req, res) => {
             const httpRequest = {
-                body: req.params
+                routeParams: req.params
             };
 
             const httpResponse = await service.delete(httpRequest);
