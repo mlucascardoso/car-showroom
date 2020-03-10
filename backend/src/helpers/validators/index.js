@@ -1,5 +1,5 @@
-const date = require('./date-validator');
+const dateValidator = require('./date-validator');
 
 module.exports = {
-    date
+    dateValidator
 };
