@@ -10,7 +10,7 @@ module.exports = {
     dialect: database.dialect,
     storage: './__tests__/database.sqlite',
     operatorAliases: false,
-    logging: true,
+    logging: false,
     define: {
         timestamps: true,
         underscored: true,
