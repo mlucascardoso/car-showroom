@@ -6,6 +6,10 @@ module.exports = class HttpResponse {
    * @return {object}
    */
     static success(data) {
+        if (!data) {
+            return HttpResponse.serverError();
+        }
+
         return {
             statusCode: 200,
             body: data
@@ -17,6 +21,10 @@ module.exports = class HttpResponse {
    * @return {object}
    */
     static badRequest(validationErrors) {
+        if (!validationErrors || validationErrors.length <= 0) {
+            return HttpResponse.serverError();
+        }
+
         return {
             statusCode: 400,
             body: {
