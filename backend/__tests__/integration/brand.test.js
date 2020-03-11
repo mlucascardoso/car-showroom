@@ -153,7 +153,7 @@ describe('Brands', () => {
             );
         });
 
-        it('should return brands with paginated results', async () => {
+        it('should return brands with paginated results by default', async () => {
             const brands = [];
             for (let i = 0; i <= 10; i++) {
                 const brand = factory.create('Brand', {
@@ -166,10 +166,15 @@ describe('Brands', () => {
             const response = await request.get('/api/brands');
 
             expect(response.status).toBe(200);
+            expect(response.body.body.rows.length).toBe(10);
             expect(response.body).toEqual(
                 expect.objectContaining({
                     body: expect.objectContaining({
-                        count: expect.any(Number),
+                        count: 11,
+                        rows: expect.arrayContaining([
+                            expect.objectContaining(brands[0]),
+                            expect.objectContaining(brands[1])
+                        ])
                     })
                 })
             );

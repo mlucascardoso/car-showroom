@@ -3,7 +3,7 @@ module.exports = {
     clearMocks: true,
     collectCoverageFrom: ['src/**/*.js', '!src/router/**/*.js', '!src/config/**/*.js', '!src/server.js', '!src/**/**/index.js'],
     coverageDirectory: 'coverage',
-    modulePathIgnorePatterns: ['.database'],
+    modulePathIgnorePatterns: ['.database/data', 'src/database/migrations'],
     testPathIgnorePatterns: ['factories.js', 'truncate.js'],
     testEnvironment: 'node',
 };

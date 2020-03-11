@@ -1,3 +1,4 @@
+const { paginator } = require('../helpers/database');
 const { HttpResponse } = require('../helpers/http');
 const { Brand } = require('../models');
 
@@ -14,11 +15,21 @@ module.exports = class BrandService {
      * @param {object} httpRequest
      * @return {object}
      */
-    async findAll(httpRequest) {
+    async findAll({ getParams }) {
         try {
-            const brands = await this.model.findAndCountAll();
+            const { limit, offset } = paginator();
 
-            return HttpResponse.success(brands);
+            const rows = await this.model.findAll({
+                limit,
+                offset
+            });
+
+            const count = await this.model.count();
+
+            return HttpResponse.success({
+                count,
+                rows
+            });
         } catch (err) {
             return HttpResponse.serverError();
         }
