@@ -17,7 +17,9 @@ module.exports = class BrandService {
      */
     async findAll({ getParams }) {
         try {
-            const { limit, offset } = paginator();
+            const { limit, offset } = paginator({
+                page: getParams.page, limit: getParams.limit
+            });
 
             const rows = await this.model.findAll({
                 limit,

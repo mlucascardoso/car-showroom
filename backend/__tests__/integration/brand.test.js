@@ -179,5 +179,86 @@ describe('Brands', () => {
                 })
             );
         });
+
+        it('should return brands with paginated results if page is provided', async () => {
+            const brands = [];
+            for (let i = 0; i <= 10; i++) {
+                const brand = factory.create('Brand', {
+                    name: faker.name.findName()
+                });
+                brands.push(brand);
+            }
+
+            const { request } = makeSut();
+            const response = await request.get('/api/brands?page=2');
+
+            expect(response.status).toBe(200);
+            expect(response.body.body.rows.length).toBe(1);
+            expect(response.body).toEqual(
+                expect.objectContaining({
+                    body: expect.objectContaining({
+                        count: 11,
+                        rows: expect.arrayContaining([
+                            expect.objectContaining(brands[brands.length - 1])
+                        ])
+                    })
+                })
+            );
+        });
+
+        it('should return brands with paginated results if limit is provided', async () => {
+            const brands = [];
+            for (let i = 0; i <= 10; i++) {
+                const brand = factory.create('Brand', {
+                    name: faker.name.findName()
+                });
+                brands.push(brand);
+            }
+
+            const { request } = makeSut();
+            const response = await request.get('/api/brands?limit=5');
+
+            expect(response.status).toBe(200);
+            expect(response.body.body.rows.length).toBe(5);
+            expect(response.body).toEqual(
+                expect.objectContaining({
+                    body: expect.objectContaining({
+                        count: 11,
+                        rows: expect.arrayContaining([
+                            expect.objectContaining(brands[0])
+                        ])
+                    })
+                })
+            );
+        });
+
+        it('should return brands with paginated results if page and limit are provided', async () => {
+            const brands = [];
+            for (let i = 0; i <= 10; i++) {
+                const brand = factory.create('Brand', {
+                    name: faker.name.findName()
+                });
+                brands.push(brand);
+            }
+
+            const { request } = makeSut();
+            const response = await request.get('/api/brands?page=2&limit=8');
+
+            expect(response.status).toBe(200);
+            expect(response.body.body.rows.length).toBe(3);
+            expect(response.body).toEqual(
+                expect.objectContaining({
+                    body: expect.objectContaining({
+                        count: 11,
+                        rows: expect.arrayContaining([
+                            expect.objectContaining({
+                                id: expect.any(Number),
+                                name: expect.any(String)
+                            })
+                        ])
+                    })
+                })
+            );
+        });
     });
 });
