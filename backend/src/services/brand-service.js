@@ -1,13 +1,14 @@
 const { paginator } = require('../helpers/database');
 const { HttpResponse } = require('../helpers/http');
-const { Brand } = require('../models');
 
 module.exports = class BrandService {
     /**
+     *
+     * @param {object} options
      * @constructor
      */
-    constructor() {
-        this.model = Brand;
+    constructor({ model }) {
+        this.model = model;
     }
 
     /**

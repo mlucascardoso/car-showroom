@@ -2,11 +2,12 @@ const router = require('express').Router();
 
 const { create, findAll } = require('../../config/adapters/express-router-adapter');
 const validate = require('../../config/middlewares/validator');
+const { Brand } = require('../../models');
 const BrandService = require('../../services/brand-service');
 const { createValidator, findAllValidator } = require('./validators');
 
 module.exports = (app) => {
-    const service = new BrandService();
+    const service = new BrandService({ model: Brand });
 
     app.use('/brands', router);
 

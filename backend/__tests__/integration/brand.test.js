@@ -3,6 +3,7 @@ const superRequest = require('supertest');
 
 const app = require('../../src/app')();
 const { InvalidParamError, MissingParamError, ServerError } = require('../../src/helpers/errors');
+const { Brand } = require('../../src/models');
 const BrandService = require('../../src/services/brand-service');
 const factory = require('../factories');
 const truncate = require('../utils/truncate');
@@ -16,12 +17,42 @@ const makeSut = () => {
 };
 
 const makeService = () => {
-    return new BrandService();
+    return new BrandService({ model: Brand });
+};
+
+const makeBrandModelSpy = () => {
+    /**
+     * @class
+     */
+    class BrandModel {
+        /**
+         * @throws {error}
+         */
+        async create() {
+            throw new ServerError();
+        }
+
+        /**
+         * @throws {error}
+         */
+        async findAll() {
+            throw new ServerError();
+        }
+
+        /**
+         * @throws {error}
+         */
+        async findOne() {
+            throw new ServerError();
+        }
+    }
+
+    return new BrandModel();
 };
 
 const makeServiceWithError = () => {
-    const service = new BrandService();
-    service.model = null;
+    const model = makeBrandModelSpy();
+    const service = new BrandService({ model });
     return service;
 };
 
