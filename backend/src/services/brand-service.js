@@ -58,4 +58,26 @@ module.exports = class BrandService {
             return HttpResponse.serverError();
         }
     }
+
+    /**
+     *
+     * @param {object} httpRequest
+     * @return {object}
+     */
+    async update({ routeParams, bodyParams }) {
+        try {
+            await this.model.update(
+                { name: bodyParams.name },
+                {
+                    where: { id: routeParams.id },
+                }
+            );
+
+            const brand = await this.model.findByPk(routeParams.id);
+
+            return HttpResponse.success(brand);
+        } catch (err) {
+            return HttpResponse.serverError();
+        }
+    }
 };

@@ -292,4 +292,88 @@ describe('Brands', () => {
             );
         });
     });
+
+    describe('Update', () => {
+        it('should throw error 500 on failure', async () => {
+            const { serviceWithError } = makeSut();
+            const response = await serviceWithError.update({});
+
+            expect(response.statusCode).toBe(500);
+            expect(response.body).toEqual(
+                expect.objectContaining({
+                    errors: new ServerError().message
+                })
+            );
+        });
+
+        it('should return 400 if brand name is too short', async () => {
+            const { request, service } = makeSut();
+
+            const brand = await service.create({ bodyParams: { name: faker.name.findName() } });
+
+            const response =
+                await request
+                    .put(`/api/brands/${brand.body.id}`)
+                    .send({
+                        name: 'Test'
+                    });
+
+            expect(response.status).toBe(400);
+            expect(response.body).toEqual(
+                expect.objectContaining({
+                    body: expect.objectContaining({
+                        errors: expect.arrayContaining([
+                            {
+                                field: 'name',
+                                message: new InvalidParamError('name').message
+                            }
+                        ])
+                    })
+                })
+            );
+        });
+
+        it('should return updated Brand', async () => {
+            const { request, service } = makeSut();
+
+            const brand = await service.create({ bodyParams: { name: faker.name.findName() } });
+
+            const response =
+                await request
+                    .put(`/api/brands/${brand.body.id}`)
+                    .send({
+                        name: 'Teste'
+                    });
+
+            expect(response.status).toBe(200);
+            expect(response.body).toEqual(
+                expect.objectContaining({
+                    body: expect.objectContaining({
+                        name: 'Teste'
+                    })
+                })
+            );
+        });
+
+        it('should return 200 no name is provided', async () => {
+            const { request, service } = makeSut();
+
+            const name = faker.name.findName();
+            const brand = await service.create({ bodyParams: { name } });
+
+            const response =
+                await request
+                    .put(`/api/brands/${brand.body.id}`)
+                    .send({});
+
+            expect(response.status).toBe(200);
+            expect(response.body).toEqual(
+                expect.objectContaining({
+                    body: expect.objectContaining({
+                        name
+                    })
+                })
+            );
+        });
+    });
 });
