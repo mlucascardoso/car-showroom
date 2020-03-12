@@ -22,6 +22,14 @@ const findAllValidator = () => {
     ];
 };
 
+const findByIdValidator = () => {
+    return [
+        param('id')
+            .isInt()
+            .withMessage(new InvalidParamError('id').message),
+    ];
+};
+
 const updateValidator = () => {
     return [
         param('id')
@@ -34,8 +42,18 @@ const updateValidator = () => {
     ];
 };
 
+const destroyValidator = () => {
+    return [
+        param('id')
+            .isInt()
+            .withMessage(new InvalidParamError('id').message),
+    ];
+};
+
 module.exports = {
     createValidator,
+    destroyValidator,
     findAllValidator,
+    findByIdValidator,
     updateValidator,
 };

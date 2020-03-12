@@ -41,6 +41,20 @@ module.exports = class BrandService {
     /**
      *
      * @param {object} httpRequest
+     */
+    async findById({ routeParams }) {
+        try {
+            const brand = await this.model.findByPk(routeParams.id);
+
+            return HttpResponse.success(brand);
+        } catch (err) {
+            return HttpResponse.serverError();
+        }
+    }
+
+    /**
+     *
+     * @param {object} httpRequest
      * @return {object}
      */
     async create({ bodyParams }) {
@@ -76,6 +90,20 @@ module.exports = class BrandService {
             const brand = await this.model.findByPk(routeParams.id);
 
             return HttpResponse.success(brand);
+        } catch (err) {
+            return HttpResponse.serverError();
+        }
+    }
+
+    /**
+     *
+     * @param {object} httpRequest
+     */
+    async destroy({ routeParams }) {
+        try {
+            const deletedBrand = await this.model.destroy({ where: { id: routeParams.id } });
+
+            return HttpResponse.success({ success: !!deletedBrand });
         } catch (err) {
             return HttpResponse.serverError();
         }

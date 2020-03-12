@@ -26,23 +26,30 @@ const makeBrandModelSpy = () => {
      */
     class BrandModel {
         /**
-         * @throws {error}
+         * @throws {Error}
          */
         async create() {
             throw new ServerError();
         }
 
         /**
-         * @throws {error}
+         * @throws {Error}
          */
         async findAll() {
             throw new ServerError();
         }
 
         /**
-         * @throws {error}
+         * @throws {Error}
          */
-        async findOne() {
+        async findByPk() {
+            throw new ServerError();
+        }
+
+        /**
+         * @throws {Error}
+         */
+        async destroy() {
             throw new ServerError();
         }
     }
@@ -306,6 +313,25 @@ describe('Brands', () => {
             );
         });
 
+        it('should throw error 400 on invalid ID', async () => {
+            const { request } = makeSut();
+            const response = await request.put(`/api/brands/abc`);
+
+            expect(response.statusCode).toBe(400);
+            expect(response.body).toEqual(
+                expect.objectContaining({
+                    body: expect.objectContaining({
+                        errors: expect.arrayContaining([
+                            expect.objectContaining({
+                                field: 'id',
+                                message: new InvalidParamError('id').message
+                            })
+                        ])
+                    })
+                })
+            );
+        });
+
         it('should return 400 if brand name is too short', async () => {
             const { request, service } = makeSut();
 
@@ -371,6 +397,107 @@ describe('Brands', () => {
                 expect.objectContaining({
                     body: expect.objectContaining({
                         name
+                    })
+                })
+            );
+        });
+    });
+
+    describe('Destroy', () => {
+        it('should throw error 500 on failure', async () => {
+            const { serviceWithError } = makeSut();
+            const response = await serviceWithError.destroy({});
+
+            expect(response.statusCode).toBe(500);
+            expect(response.body).toEqual(
+                expect.objectContaining({
+                    errors: new ServerError().message
+                })
+            );
+        });
+
+        it('should throw error 400 on invalid ID', async () => {
+            const { request } = makeSut();
+            const response = await request.delete(`/api/brands/abc`);
+
+            expect(response.statusCode).toBe(400);
+            expect(response.body).toEqual(
+                expect.objectContaining({
+                    body: expect.objectContaining({
+                        errors: expect.arrayContaining([
+                            expect.objectContaining({
+                                field: 'id',
+                                message: new InvalidParamError('id').message
+                            })
+                        ])
+                    })
+                })
+            );
+        });
+
+        it('should delete a brand logically', async () => {
+            const { request, service } = makeSut();
+
+            const name = faker.name.findName();
+            const brand = await service.create({ bodyParams: { name } });
+            const response = await request.delete(`/api/brands/${brand.body.id}`);
+
+            expect(response.status).toBe(200);
+            expect(response.body).toEqual(
+                expect.objectContaining({
+                    body: expect.objectContaining({
+                        success: true
+                    })
+                })
+            );
+        });
+    });
+
+    describe('Find by ID', () => {
+        it('should throw error 500 on failure', async () => {
+            const { serviceWithError } = makeSut();
+            const response = await serviceWithError.findById({});
+
+            expect(response.statusCode).toBe(500);
+            expect(response.body).toEqual(
+                expect.objectContaining({
+                    errors: new ServerError().message
+                })
+            );
+        });
+
+        it('should throw error 400 on invalid ID', async () => {
+            const { request } = makeSut();
+            const response = await request.get(`/api/brands/abc`);
+
+            expect(response.statusCode).toBe(400);
+            expect(response.body).toEqual(
+                expect.objectContaining({
+                    body: expect.objectContaining({
+                        errors: expect.arrayContaining([
+                            expect.objectContaining({
+                                field: 'id',
+                                message: new InvalidParamError('id').message
+                            })
+                        ])
+                    })
+                })
+            );
+        });
+
+        it('should return brand by ID', async () => {
+            const { request, service } = makeSut();
+
+            const name = faker.name.findName();
+            const brand = await service.create({ bodyParams: { name } });
+            const response = await request.get(`/api/brands/${brand.body.id}`);
+
+            expect(response.status).toBe(200);
+            expect(response.body).toEqual(
+                expect.objectContaining({
+                    body: expect.objectContaining({
+                        id: brand.body.id,
+                        name: brand.body.name
                     })
                 })
             );

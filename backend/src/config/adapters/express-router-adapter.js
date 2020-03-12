@@ -77,7 +77,7 @@ module.exports = class ExpressRouterAdapter {
                 routeParams: req.params
             };
 
-            const httpResponse = await service.delete(httpRequest);
+            const httpResponse = await service.destroy(httpRequest);
 
             res.status(httpResponse.statusCode).json(httpResponse);
         };
